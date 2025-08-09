@@ -1,125 +1,16 @@
-
-// const express = require('express');
-// const webpush = require('web-push');
-// const bodyParser = require('body-parser');
-// const path = require('path');
-// const mongoose = require('mongoose');
-// const cron = require('node-cron');
-
-// const app = express();
-// app.use(bodyParser.json());
-// app.use(express.static(path.join(__dirname, 'public')));
-
-// // MongoDB connect
-// mongoose.connect('mongodb+srv://raushankumar23082004:pbF1bBrYGJxtvkPn@rausnotify.zlus0kg.mongodb.net/')
-//   .then(() => console.log("✅ MongoDB connected"))
-//   .catch(err => console.error(err));
-
-// // Models
-// const Subscription = mongoose.model('Subscription', new mongoose.Schema({}, { strict: false }));
-// const Notification = mongoose.model('Notification', {
-//   message: String,
-//   time: Date
-// });
-
-// // VAPID Keys
-// const publicVapidKey = 'BNJ3zMpwqw4YGHVNIpxhhY1mF4YwN_PXWbal6qf9--iQYJ3yS5JMRWtFBNG5y6Skw8v_bUWRjMedTpcazL_XDys';
-// const privateVapidKey = '7xRhYaKSwi2vhFe_mkiqy2Kvuj6vzd6etY3-WKBkCr4';
-// webpush.setVapidDetails('mailto:raushankumar23082004@gmail.com', publicVapidKey, privateVapidKey);
-
-// // Save subscription
-// app.post('/subscribe', async (req, res) => {
-//   const subscription = new Subscription(req.body);
-//   await subscription.save();
-//   res.status(201).json({});
-// });
-
-// // Save notification schedule
-// app.post('/schedule', async (req, res) => {
-//   const { message, dateTime } = req.body;
-//   await Notification.create({ message, time: new Date(dateTime) });
-//   res.json({ status: 'scheduled' });
-// });
-
-// // Get all scheduled notifications
-// app.get('/notifications', async (req, res) => {
-//   const list = await Notification.find().sort({ time: 1 });
-//   res.json(list);
-// });
-
-// // Delete a scheduled notification
-// app.delete('/notifications/:id', async (req, res) => {
-//   await Notification.findByIdAndDelete(req.params.id);
-//   res.json({ status: 'deleted' });
-// });
-
-// // Edit a scheduled notification
-// app.put('/notifications/:id', async (req, res) => {
-//   const { message, dateTime } = req.body;
-//   await Notification.findByIdAndUpdate(req.params.id, {
-//     message,
-//     time: new Date(dateTime)
-//   });
-//   res.json({ status: 'updated' });
-// });
-
-// // Cron job to send notifications every minute
-// // Cron job to send notifications every minute
-// cron.schedule('* * * * *', async () => {
-//     const now = new Date();
-//     const oneMinuteAgo = new Date(now.getTime() - 60 * 1000);
-
-//     const due = await Notification.find({
-//         time: { $gt: oneMinuteAgo, $lte: now }
-//     });
-
-//     if (due.length > 0) {
-//         const subscriptions = await Subscription.find();
-//         for (let notif of due) {
-//             try {
-//                 // Sending notification to all subscribers
-//                 for (let sub of subscriptions) {
-//                     try {
-//                         await webpush.sendNotification(
-//                             sub.toObject(),
-//                             JSON.stringify({ message: notif.message })
-//                         );
-//                     } catch (err) {
-//                         console.error("Push error:", err);
-//                         // Optional: Handle expired subscriptions here if needed
-//                     }
-//                 }
-//             } catch (err) {
-//                 console.error("Error sending notification:", err);
-//             } finally {
-//                 // This block will always run, whether there's an error or not.
-//                 // It ensures the notification is deleted.
-//                 await Notification.findByIdAndDelete(notif._id);
-//                 console.log(`Notification with ID ${notif._id} deleted.`);
-//             }
-//         }
-//     }
-// });
-
-// app.listen(3000, () => console.log('🚀 Server running on http://localhost:3000'));
-
-
-
 const express = require('express');
 const webpush = require('web-push');
 const bodyParser = require('body-parser');
 const path = require('path');
 const mongoose = require('mongoose');
+const dotenv=require("dotenv");
+dotenv.config();
 
 const app = express();
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
-
 // MongoDB connection
-mongoose.connect('mongodb+srv://raushankumar23082004:pbF1bBrYGJxtvkPn@rausnotify.zlus0kg.mongodb.net/', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => console.log("✅ MongoDB connected"))
+mongoose.connect(process.env.MONGODB_URI).then(() => console.log("✅ MongoDB connected"))
   .catch(err => console.error("❌ MongoDB connection error:", err));
 
 // Enhanced Models with better indexing
@@ -147,9 +38,9 @@ const Subscription = mongoose.model('Subscription', subscriptionSchema);
 const Notification = mongoose.model('Notification', notificationSchema);
 
 // VAPID Keys
-const publicVapidKey = 'BNJ3zMpwqw4YGHVNIpxhhY1mF4YwN_PXWbal6qf9--iQYJ3yS5JMRWtFBNG5y6Skw8v_bUWRjMedTpcazL_XDys';
-const privateVapidKey = '7xRhYaKSwi2vhFe_mkiqy2Kvuj6vzd6etY3-WKBkCr4';
-webpush.setVapidDetails('mailto:raushankumar23082004@gmail.com', publicVapidKey, privateVapidKey);
+const publicVapidKey = process.env.publicVapidKey;
+const privateVapidKey = process.env.privateVapidKey;
+webpush.setVapidDetails(`mailto:${process.env.EMAIL}`, publicVapidKey, privateVapidKey);
 
 // Global variable to track if notification job is running
 let isJobRunning = false;
