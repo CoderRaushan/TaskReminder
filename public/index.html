@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Schedule Notification</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,149 +9,150 @@
     * {
       box-sizing: border-box;
     }
-    
-    body { 
-      font-family: Arial, sans-serif; 
-      background: #f4f4f4; 
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
       padding: 10px;
       margin: 0;
     }
-    
-    .container { 
-      max-width: 600px; 
-      margin: auto; 
-      background: #fff; 
-      padding: 20px; 
-      border-radius: 10px; 
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       width: 100%;
     }
-    
-    h1 { 
-      text-align: center; 
+
+    h1 {
+      text-align: center;
       margin-bottom: 20px;
       font-size: 1.5rem;
     }
-    
-    input, button { 
-      padding: 12px; 
-      margin: 8px 0; 
-      width: 100%; 
-      border-radius: 5px; 
+
+    input,
+    button {
+      padding: 12px;
+      margin: 8px 0;
+      width: 100%;
+      border-radius: 5px;
       font-size: 14px;
     }
-    
-    input { 
-      border: 1px solid #ccc; 
+
+    input {
+      border: 1px solid #ccc;
     }
-    
-    button { 
-      background: #28a745; 
-      color: white; 
-      border: none; 
+
+    button {
+      background: #28a745;
+      color: white;
+      border: none;
       cursor: pointer;
       font-weight: bold;
       transition: background 0.3s;
     }
-    
-    button:hover { 
-      background: #218838; 
+
+    button:hover {
+      background: #218838;
     }
-    
+
     .button-group {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
     }
-    
+
     .button-group button {
       flex: 1;
       min-width: 150px;
     }
-    
+
     .cleanup-btn {
       background: #dc3545 !important;
     }
-    
+
     .cleanup-btn:hover {
       background: #c82333 !important;
     }
-    
-    .list { 
-      margin-top: 20px; 
+
+    .list {
+      margin-top: 20px;
     }
-    
-    .item { 
-      background: #f9f9f9; 
-      padding: 15px; 
-      margin-bottom: 10px; 
-      border-radius: 8px; 
-      display: flex; 
-      justify-content: space-between; 
+
+    .item {
+      background: #f9f9f9;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
       align-items: flex-start;
       flex-wrap: wrap;
       gap: 10px;
     }
-    
+
     .item-content {
       flex: 1;
       min-width: 200px;
     }
-    
-    .actions { 
+
+    .actions {
       display: flex;
       gap: 10px;
     }
-    
-    .actions i { 
-      cursor: pointer; 
+
+    .actions i {
+      cursor: pointer;
       padding: 8px;
       border-radius: 4px;
       transition: all 0.3s;
       font-size: 16px;
     }
-    
+
     .actions .fa-edit {
       color: #007bff;
     }
-    
+
     .actions .fa-edit:hover {
       background: #007bff;
       color: white;
     }
-    
+
     .actions .fa-trash {
       color: #dc3545;
     }
-    
-    .actions .fa-trash:hover { 
+
+    .actions .fa-trash:hover {
       background: #dc3545;
       color: white;
     }
-    
-    .status { 
-      font-size: 14px; 
-      color: #666; 
-      margin-top: 15px; 
+
+    .status {
+      font-size: 14px;
+      color: #666;
+      margin-top: 15px;
       padding: 10px;
       background: #e9ecef;
       border-radius: 5px;
       text-align: center;
     }
-    
+
     .edit-modal {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0, 0, 0, 0.5);
       display: none;
       justify-content: center;
       align-items: center;
       z-index: 1000;
     }
-    
+
     .edit-modal-content {
       background: white;
       padding: 20px;
@@ -160,44 +162,44 @@
       max-height: 80vh;
       overflow-y: auto;
     }
-    
+
     .edit-modal h3 {
       margin-top: 0;
       margin-bottom: 20px;
       text-align: center;
     }
-    
+
     .edit-form {
       display: flex;
       flex-direction: column;
       gap: 15px;
     }
-    
+
     .edit-form label {
       font-weight: bold;
       margin-bottom: 5px;
       display: block;
     }
-    
+
     .modal-buttons {
       display: flex;
       gap: 10px;
       margin-top: 20px;
     }
-    
+
     .modal-buttons button {
       flex: 1;
       margin: 0;
     }
-    
+
     .cancel-btn {
       background: #6c757d !important;
     }
-    
+
     .cancel-btn:hover {
       background: #5a6268 !important;
     }
-    
+
     /* Responsive Design */
     @media (max-width: 768px) {
       .container {
@@ -205,57 +207,59 @@
         margin: 5px;
         border-radius: 5px;
       }
-      
+
       h1 {
         font-size: 1.3rem;
       }
-      
+
       .item {
         flex-direction: row;
         align-items: stretch;
       }
-      
+
       .item-content {
         min-width: auto;
       }
-      
+
       .actions {
         justify-content: center;
         margin-top: 10px;
       }
-      
+
       .button-group {
         flex-direction: column;
       }
-      
+
       .button-group button {
         min-width: auto;
       }
-      
+
       .edit-modal-content {
         width: 95%;
         padding: 15px;
       }
     }
-    
+
     @media (max-width: 480px) {
       body {
         padding: 5px;
       }
-      
+
       .container {
         padding: 10px;
       }
-      
+
       h1 {
         font-size: 1.2rem;
       }
-      
-      input, button {
+
+      input,
+      button {
         padding: 10px;
-        font-size: 16px; /* Prevents zoom on iOS */
+        font-size: 16px;
+        /* Prevents zoom on iOS */
       }
-      
+
       .actions i {
         padding: 10px;
         font-size: 18px;
@@ -263,6 +267,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <h1>Schedule Notification</h1>
@@ -302,7 +307,7 @@
 
   <script>
     // Service Worker and Push Notification Setup
-    
+
     const publicVapidKey = 'BNJ3zMpwqw4YGHVNIpxhhY1mF4YwN_PXWbal6qf9--iQYJ3yS5JMRWtFBNG5y6Skw8v_bUWRjMedTpcazL_XDys';
     let currentEditId = null;
 
@@ -311,27 +316,27 @@
         try {
           // Check if already registered
           let reg = await navigator.serviceWorker.getRegistration();
-          
+
           if (!reg) {
             reg = await navigator.serviceWorker.register('/sw.js');
           }
-          
+
           // Check if subscription already exists
           let subscription = await reg.pushManager.getSubscription();
-          
+
           if (!subscription) {
             subscription = await reg.pushManager.subscribe({
               userVisibleOnly: true,
               applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
             });
           }
-          
+
           const response = await fetch('/subscribe', {
             method: 'POST',
             body: JSON.stringify(subscription),
             headers: { 'Content-Type': 'application/json' }
           });
-          
+
           const result = await response.json();
           document.getElementById('status').textContent = `Service Worker registered. Active subscriptions: ${result.totalSubscriptions || 1}`;
         } catch (err) {
@@ -349,18 +354,18 @@
       e.preventDefault();
       const message = document.getElementById('msg').value;
       const dateTime = document.getElementById('datetime').value;
-      
+
       // Validate future date for new notifications only
       const scheduledDate = new Date(dateTime);
       const now = new Date();
-      
+
       try {
         const response = await fetch('/schedule', {
           method: 'POST',
           body: JSON.stringify({ message, dateTime }),
           headers: { 'Content-Type': 'application/json' }
         });
-        
+
         if (response.ok) {
           document.getElementById('form').reset();
           loadNotifications();
@@ -380,34 +385,41 @@
         const data = await res.json();
         const list = document.getElementById('list');
         list.innerHTML = "";
-        
+
         if (data.length === 0) {
           list.innerHTML = '<p style="text-align: center; color: #666; padding: 20px;">No scheduled notifications</p>';
           return;
         }
-        
+
         data.forEach(n => {
           const div = document.createElement('div');
           div.className = "item";
           const scheduledTime = new Date(n.time);
           const isOverdue = scheduledTime < new Date();
-          
+
           div.innerHTML = `
-            <div class="item-content">
-              <div style="font-weight: bold; margin-bottom: 5px;">${n.message}</div>
-              <small style="color: ${isOverdue ? '#dc3545' : '#28a745'}; font-weight: bold;">
-                ${scheduledTime.toLocaleString()}
-                ${isOverdue ? ' (Overdue)' : ''}
-              </small>
-            </div>
-            <div class="actions">
-              <i class="fa fa-edit" onclick="openEditModal('${n._id}', '${n.message.replace(/'/g, "\\'")}', '${n.time}')" title="Edit"></i>
-              <i class="fa fa-trash" onclick="deleteNotif('${n._id}')" title="Delete"></i>
-            </div>
-          `;
+  <div class="item-content">
+    <div style="font-weight: bold; margin-bottom: 5px;">${n.message}</div>
+    <small style="color: ${isOverdue ? '#dc3545' : '#28a745'}; font-weight: bold;">
+      ${scheduledTime.toLocaleString('en-US', {
+            hour: 'numeric',
+            minute: '2-digit',
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric',
+            hour12: true
+          })}
+      ${isOverdue ? ' (Overdue)' : ''}
+    </small>
+  </div>
+  <div class="actions">
+    <i class="fa fa-edit" onclick="openEditModal('${n._id}', '${n.message.replace(/'/g, "\\'")}', '${n.time}')" title="Edit"></i>
+    <i class="fa fa-trash" onclick="deleteNotif('${n._id}')" title="Delete"></i>
+  </div>
+`;
           list.appendChild(div);
         });
-        
+
         document.getElementById('status').textContent = `${data.length} notification(s) scheduled`;
       } catch (err) {
         console.error('Failed to load notifications:', err);
@@ -417,7 +429,7 @@
 
     async function deleteNotif(id) {
       if (!confirm('Delete this notification?')) return;
-      
+
       try {
         const response = await fetch('/notifications/' + id, { method: 'DELETE' });
         if (response.ok) {
@@ -446,16 +458,16 @@
 
     async function updateNotification() {
       if (!currentEditId) return;
-      
+
       const newMsg = document.getElementById('editMsg').value.trim();
       const newTime = document.getElementById('editDateTime').value;
-      
+
       // Only check if message is not empty - no future date validation for edits
       if (!newMsg) {
         alert('Message cannot be empty');
         return;
       }
-      
+
       // No validation for future date or changes - allow any update
       try {
         const response = await fetch('/notifications/' + currentEditId, {
@@ -463,7 +475,7 @@
           body: JSON.stringify({ message: newMsg, dateTime: newTime }),
           headers: { 'Content-Type': 'application/json' }
         });
-        
+
         if (response.ok) {
           closeEditModal();
           loadNotifications();
@@ -478,14 +490,14 @@
     }
 
     // Close modal when clicking outside
-    document.getElementById('editModal').onclick = function(e) {
+    document.getElementById('editModal').onclick = function (e) {
       if (e.target === this) {
         closeEditModal();
       }
     }
 
     // Close modal with Escape key
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && document.getElementById('editModal').style.display === 'flex') {
         closeEditModal();
       }
@@ -504,22 +516,22 @@
 
     // Load notifications on page load
     loadNotifications();
-    
+
     // Auto-refresh every 30 seconds
     setInterval(loadNotifications, 30000);
-    
+
     // Cleanup duplicate subscriptions
     async function cleanupSubscriptions() {
       if (!confirm('Remove duplicate subscriptions? This will clean up your database.')) return;
-      
+
       try {
         document.getElementById('status').textContent = 'Cleaning up duplicates...';
-        
+
         const response = await fetch('/cleanup-subscriptions', { method: 'POST' });
         const result = await response.json();
-        
+
         if (response.ok) {
-          document.getElementById('status').textContent = 
+          document.getElementById('status').textContent =
             `Cleanup complete! Removed ${result.removed} duplicates. ${result.uniqueDevices} unique devices remaining.`;
         } else {
           throw new Error(result.error);
@@ -529,22 +541,22 @@
         document.getElementById('status').textContent = 'Cleanup failed';
       }
     }
-    
+
     // Check subscription stats on load
     async function checkSubscriptionStats() {
       try {
         const response = await fetch('/subscription-stats');
         const stats = await response.json();
-        
+
         if (stats.duplicates > 0) {
-          document.getElementById('status').textContent = 
+          document.getElementById('status').textContent =
             `⚠️ Found ${stats.duplicates} duplicate subscriptions out of ${stats.totalSubscriptions} total`;
         }
       } catch (err) {
         console.log('Could not fetch subscription stats');
       }
     }
-    
+
     // Check stats after loading notifications
     setTimeout(checkSubscriptionStats, 2000);
   </script>
@@ -579,14 +591,15 @@
           );
         });
       `;
-      
+
       const blob = new Blob([swCode], { type: 'application/javascript' });
       const swUrl = URL.createObjectURL(blob);
-      
+
       navigator.serviceWorker.register(swUrl).catch(err => {
         console.error('Service worker registration failed:', err);
       });
     }
   </script>
 </body>
+
 </html>
